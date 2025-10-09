@@ -11,10 +11,18 @@ default: &default
 development:
   <<: *default
   database: realbid_dev
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  host: <%= ENV["PG_HOST"] %>
+  port: <%= ENV["PG_PORT"] || 5432 %>
 
 test:
   <<: *default
   database: realbid_test
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  host: <%= ENV["PG_HOST"] %>
+  port: <%= ENV["PG_PORT"] || 5432 %>
 
 production:
   <<: *default
