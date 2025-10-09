@@ -1,0 +1,42 @@
+<%= form_with(model: @user, class: "auth-form wrapper") do |f| %>
+  <div class="form-heading">
+    <%= render "shared/logo" %>
+    <h1>Create Account</h1>
+    <p>Join RealBid and start bidding today</p>
+  </div>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, autofocus: true, class: "input", placeholder: "John Doe" %>
+  <% if @user.errors[:name].any? %>
+    <div class="field-error"><%= @user.errors[:name].first %></div>
+  <% end %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, placeholder: "your@email.com" %>
+  <% if @user.errors[:email].any? %>
+    <div class="field-error"><%= @user.errors[:email].first %></div>
+  <% end %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, placeholder: "********" %>
+  <% if @user.errors[:password].any? %>
+    <div class="field-error"><%= @user.errors[:password].first %></div>
+  <% end %>
+
+  <%= f.label :password_confirmation, "Confirmation Password" %>
+  <%= f.password_field :password_confirmation, placeholder: "********" %>
+  <% if @user.errors[:password_confirmation].any? %>
+    <div class="field-error"><%= @user.errors[:password_confirmation].first %></div>
+  <% end %>
+
+  <button type="submit">
+    Sign Up
+  </button>
+
+  <p class="form-link">
+    Already have an account?
+    <span class="link">
+      <%= link_to "Log in", login_url %>
+    </span>
+  </p>
+<% end %>

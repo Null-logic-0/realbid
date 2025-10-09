@@ -1,10 +1,120 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+@import "form.css";
+@import "errors.css";
+
+/* Global Styles */
+
+* {
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fafafa;
+    padding: 6px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: #2b333b;
+    font-size: 30px;
+}
+
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    color: #74808d;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    background: transparent;
+    padding: 0
+}
+
+input, textarea {
+    background-color: #fafafa;
+    border: 1px solid #dfe4eb;
+    border-radius: 8px;
+    padding: 14px 8px 14px 8px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #2b333b;
+    outline: none;
+    width: 100%;
+
+}
+
+.wrapper {
+    background-color: #ffffff;
+    border: 1px solid #dfe4eb;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+
+/* Reusable button style */
+
+button {
+    border: none;
+    background-color: #1f8fff;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px 8px 14px 8px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+
+
+}
+
+button:hover {
+    background-color: #3d9eff;
+    transition: all;
+}
+
+/* Logo */
+
+.logo {
+    color: #fff;
+    background-color: #1f8fff;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+
+}
+
+/* Logout button */
+
+.logout-button {
+    background-color: transparent;
+    color: red;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    width: 100%;
+    padding: 14px 8px 14px 8px;
+    border-radius: 8px;
+}
+
+.logout-button:hover {
+    background-color: #ffe470;
+    transition: all;
+}
