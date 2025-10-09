@@ -4,7 +4,9 @@ class User < ApplicationRecord
   before_save :capitalize_name, :lowercase_email
 
   validates :name, presence: true
-  validates :email, format: { with: /\S+@\S+\.\S+/ },
+  validates :email, format: {
+    with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+    message: "must be a valid email" },
             uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 10, allow_blank: true }
 
