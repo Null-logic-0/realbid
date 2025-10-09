@@ -1,0 +1,41 @@
+# Dev Dockerfile for Rails + Hotwire
+ARG RUBY_VERSION=3.4.4
+FROM ruby:${RUBY_VERSION}-slim
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential \
+    curl \
+    git \
+    libpq-dev \
+    libyaml-dev \
+    pkg-config \
+    postgresql-client \
+    vim \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
+
+WORKDIR /rails
+
+ENV RAILS_ENV=development \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT="" \
+    RAILS_LOG_TO_STDOUT=true
+
+# Install Ruby gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+
+# Copy app code
+COPY . .
+
+# Add entrypoint
+COPY entrypoint.dev.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.dev.sh
+
+EXPOSE 3000
+
+ENTRYPOINT ["entrypoint.dev.sh"]
+CMD ["rails", "server", "-b", "0.0.0.0"]

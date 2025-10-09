@@ -1,0 +1,29 @@
+# Ignore local stuff
+.git
+.gitignore
+log/*
+tmp/*
+vendor/bundle
+.bundle
+node_modules
+coverage
+spec/tmp
+storage/*
+public/assets
+public/packs
+public/packs-test
+
+# Ignore Docker-related caches
+.dockerignore
+docker-compose.yml
+Dockerfile*
+
+# Ignore local dev configs
+.env
+.env.*
+*.swp
+*.swo
+
+# OS/editor files
+.DS_Store
+Thumbs.db

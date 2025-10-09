@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV["PG_HOST"] || "localhost" %>
+  port: <%= ENV["PG_PORT"] || 5432 %>
+  username: <%= ENV["PG_USERNAME"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+
+development:
+  <<: *default
+  database: realbid_dev
+
+test:
+  <<: *default
+  database: realbid_test
+
+production:
+  <<: *default
+  database: realbid_production
+  username: postgres
+  password: <%= ENV["REALBID_DATABASE_PASSWORD"] %>
