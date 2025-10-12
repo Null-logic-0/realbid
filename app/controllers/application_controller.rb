@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def create_session_for(user)
-    reset_session # prevent session fixation
+    reset_session
     session[:user_id] = user.id
     session[:expires_at] = 1.week.from_now
   end

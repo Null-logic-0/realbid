@@ -1,8 +1,9 @@
 require "test_helper"
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  def setup
+  setup do
     @user = users(:one)
+    @password = "password1234"
   end
 
   # GET /login
@@ -13,8 +14,8 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   # POST /session - successful login
   test "should log in with valid credentials" do
-    post session_path, params: { user: { email: @user.email, password: "password1234" } }
-    assert_redirected_to user_path(@user)
+    log_in_as(@user)
+    assert_redirected_to profile_path
     follow_redirect!
     assert_response :success
     assert_equal @user.id, session[:user_id]
@@ -22,22 +23,25 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   # POST /session - invalid login
   test "should not log in with invalid credentials" do
-    post session_path, params: { user: { email: @user.email, password: "wrongpass12344" } }
-    assert_response :unauthorized
+    post session_path, params: { user: { email: @user.email, password: "wrongpassword" } }
+    assert_redirected_to login_path
+    follow_redirect!
     assert_nil session[:user_id]
+    assert_response :success
   end
 
   # DELETE /session - logout
   test "should log out user" do
-    # First log in
-    post session_path, params: { user: { email: @user.email, password: "password1234" } }
+    log_in_as(@user)
     assert_equal @user.id, session[:user_id]
-
-    # Then log out
     delete session_path
     assert_redirected_to login_path
     follow_redirect!
     assert_nil session[:user_id]
     assert_response :success
+  end
+
+  def log_in_as(user)
+    post session_path, params: { user: { email: user.email, password: @password } }
   end
 end

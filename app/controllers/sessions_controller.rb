@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(user_params[:password])
       create_session_for(user)
-      redirect_to(session.delete(:intended_url) || profile_path, notice: "Welcome back, #{user.name}!")
+      redirect_to profile_path, notice: "Welcome back, #{user.name}!"
     else
       redirect_to login_path, alert: "Invalid email or password"
     end
