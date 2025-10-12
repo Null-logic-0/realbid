@@ -29,7 +29,17 @@ class ApplicationController < ActionController::Base
   def require_login
     unless current_user
       session[:intended_url] = request.url
-      redirect_to login_url
+      redirect_to login_url, alert: "You must be logged in to access this page"
+    end
+  end
+
+  def logged_in?
+    current_user.present?
+  end
+
+  def redirect_if_logged_in
+    if logged_in?
+      redirect_to profile_path, notice: "You are already logged in"
     end
   end
 end

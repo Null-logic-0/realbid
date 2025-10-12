@@ -1,17 +1,20 @@
 <div class="auth-container">
-  <%= form_with(url: session_path, scope: :user, local: true, class: "auth-form wrapper") do |f| %>
+  <%= form_with(url: session_path, scope: :user, class: "auth-form wrapper") do |f| %>
     <div class="form-heading">
       <%= render "shared/logo" %>
       <h1>Welcome Back</h1>
       <p>Sign in to your RealBid account</p>
     </div>
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, required: true, placeholder: "your@email.com" %>
-    
+    <%= f.email_field :email,
+                      autofocus: true,
+                      required: true,
+                      placeholder: "your@email.com" %>
+
     <%= f.label :password %>
     <%= f.password_field :password, required: true, placeholder: "********" %>
 
-    <button type="submit">
+    <button type="submit" class="submit-button">
       Log in
     </button>
 

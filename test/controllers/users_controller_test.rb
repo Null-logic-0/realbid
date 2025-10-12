@@ -2,25 +2,116 @@ require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @existing_user = users(:one)
+    @user = users(:one)
+    @other_user = users(:two)
+    @password = "password1234"
+    @user.update!(password: @password, password_confirmation: @password)
   end
 
-  test "should get new" do
-    get new_user_path
+  # --GET /signup
+  test "should get new (signup) page" do
+    get signup_path
     assert_response :success
+    assert_select "form"
   end
 
-  test "should create user" do
+  # --- POST /users ---
+  test "should create user with valid params" do
     assert_difference("User.count", 1) do
-      post users_path, params: { user: {
-        name: "New User",
-        email: "newuser@example.com",
-        password: "password1234",
-        password_confirmation: "password1234"
-      } }
+      post users_path, params: {
+        user: {
+          name: "New User",
+          email: "new@example.com",
+          password: "password1234",
+          password_confirmation: "password1234"
+        }
+      }
+    end
+    assert_redirected_to profile_path
+    follow_redirect!
+    assert_match "successfully signed up", response.body
+  end
+
+  test "should not create user with invalid params" do
+    assert_no_difference("User.count") do
+      post users_path, params: {
+        user: {
+          email: "",
+          password: "123",
+          password_confirmation: "456"
+        }
+      }
+    end
+    assert_response :unprocessable_entity
+  end
+
+  # --- GET /profile ---
+  test "should show current_user profile" do
+    log_in_as(@user)
+    get profile_path
+    assert_response :success
+    assert_select "h1", text: @user.name
+  end
+
+  test "should redirect profile when not logged in" do
+    get profile_path
+    assert_redirected_to login_path
+  end
+
+  # --- PATCH /update_password ---
+  test "should update password with valid current password" do
+    log_in_as(@user)
+    patch update_password_path, params: {
+      user: {
+        current_password: "password1234",
+        password: "password12345",
+        password_confirmation: "password12345"
+      }
+    }
+    assert_redirected_to login_path
+    assert_match /successfully updated your password/i, flash[:notice]
+  end
+
+  test "should not update password with invalid current password" do
+    log_in_as(@user)
+    patch update_password_path, params: {
+      user: {
+        current_password: "wrong12345678",
+        password: "pass12345678",
+        password_confirmation: "pass12345678"
+      }
+    }
+    assert_response :unprocessable_entity
+    assert_match "Current password is incorrect", response.body
+  end
+
+  # --- PATCH /update_profile ---
+  test "should update profile with valid data" do
+    log_in_as(@user)
+    patch update_profile_path, params: {
+      user: { name: "Updated name" }
+    }
+    assert_redirected_to profile_path
+    @user.reload
+    assert_equal "Updated name", @user.name
+  end
+
+  # --- DELETE /delete_account ---
+  test "should delete account" do
+    log_in_as(@user)
+
+    assert_difference("User.count", -1) do
+      delete delete_account_path
     end
 
-    new_user = User.find_by(email: "newuser@example.com")
-    assert_redirected_to user_path(new_user)
+    assert_redirected_to signup_path
+    follow_redirect!
+  end
+
+  private
+
+  def log_in_as(user)
+    post session_path, params: { user: { email: user.email, password: @password } }
+    follow_redirect! if response.redirect?
   end
 end

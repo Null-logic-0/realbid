@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "dotenv-rails", groups: [ :development, :test ]
+gem "dotenv-rails", groups: [:development, :test]
 
 gem "rails", "~> 8.0.3"
 gem "propshaft"
@@ -23,22 +23,24 @@ gem "kamal", require: false
 
 gem "thruster", require: false
 
+gem "aws-sdk-s3"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+	gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
-  gem "brakeman", require: false
+	gem "brakeman", require: false
 
-  gem "rubocop-rails-omakase", require: false
+	gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
-  gem "web-console"
+	gem "web-console"
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+	gem "capybara"
+	gem "selenium-webdriver"
 end

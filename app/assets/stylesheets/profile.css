@@ -1,0 +1,74 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 24px;
+    width: 100%;
+
+}
+
+.profile-form-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+    padding: 24px;
+    width: 100%;
+
+}
+
+.image-uploader {
+    background: none;
+    border: none;
+}
+
+.profile-image img {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.wallet-balance {
+    background: #fffbe5;
+    border: 1px solid #ffd900;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.amount {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #ffd900;
+}
+
+.delete-button-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+
+}
+

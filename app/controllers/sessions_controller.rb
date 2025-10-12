@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :require_login, except: [ :new, :create ]
+  before_action :redirect_if_logged_in, only: [ :new, :create ]
 
   def new
   end
@@ -10,14 +11,14 @@ class SessionsController < ApplicationController
 
     if user&.authenticate(user_params[:password])
       create_session_for(user)
-      redirect_to(session.delete(:intended_url) || user_path(user))
+      redirect_to(session.delete(:intended_url) || profile_path, notice: "Welcome back, #{user.name}!")
     else
-      render :new, status: :unauthorized
+      redirect_to login_path, alert: "Invalid email or password"
     end
   end
 
   def destroy
     reset_session
-    redirect_to login_path
+    redirect_to login_path, notice: "You have successfully logged out!"
   end
 end

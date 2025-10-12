@@ -1,0 +1,35 @@
+<div data-controller="modal">
+  <!-- Trigger button -->
+  <button
+    type="button"
+    data-action="click->modal#open"
+    class="<%= button_class || 'btn-primary' %>"
+  >
+    <%= button_text || "Open Modal" %>
+  </button>
+
+  <!-- Modal -->
+  <div
+    data-modal-target="modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    data-action="click->modal#close"
+  >
+    <div class="modal-content" data-action="click->modal#stopPropagation">
+      <!-- Close icon -->
+      <button data-action="click->modal#close" class="modal-close" aria-label="Close Modal">×</button>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <%= body %>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button data-action="click->modal#close" class="secondary-button">Cancel</button>
+        <%= footer %>
+      </div>
+    </div>
+  </div>
+</div>

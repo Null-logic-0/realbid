@@ -1,0 +1,7 @@
+<div class="delete-button-container">
+  <%= render "shared/modal",
+             button_text: "Delete Account",
+             button_class: "danger-button",
+             body: "<p class=caution >Do you really want to delete your account?</p>".html_safe,
+             footer: button_to("Delete", delete_account_path, method: :delete, class: "danger-button") %>
+</div>

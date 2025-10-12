@@ -1,5 +1,8 @@
 @import "form.css";
 @import "errors.css";
+@import "profile.css";
+@import "nav-menu.css";
+@import "modal.css";
 
 /* Global Styles */
 
@@ -12,7 +15,17 @@
 
 body {
     background-color: #fafafa;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1500px;
     padding: 6px;
+    margin: 0 auto;
+}
+
+button {
+    cursor: pointer;
 }
 
 
@@ -67,7 +80,7 @@ input, textarea {
 
 /* Reusable button style */
 
-button {
+.submit-button {
     border: none;
     background-color: #1f8fff;
     color: white;
@@ -81,9 +94,36 @@ button {
 
 }
 
-button:hover {
+.submit-button:hover {
     background-color: #3d9eff;
     transition: all;
+}
+
+.danger-button {
+    width: 10rem;
+    border: 2px solid #ff3535;
+    color: #ff3535;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 14px 8px 14px 8px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.danger-button:hover {
+    background: #dfe4eb;
+}
+
+.secondary-button {
+    width: 10rem;
+    color: #73808c;
+    background-color: #f3f5f7;
+    border-radius: 8px;
+    border: 2px solid #dfe4eb;
+    padding: 14px 8px 14px 8px;
+    font-size: 16px;
+    font-weight: 500;
+
 }
 
 /* Logo */
@@ -93,7 +133,9 @@ button:hover {
     background-color: #1f8fff;
     font-size: 32px;
     font-weight: bold;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 4px;
     border-radius: 8px;
     width: 40px;
@@ -110,11 +152,18 @@ button:hover {
     font-weight: 500;
     border: none;
     width: 100%;
-    padding: 14px 8px 14px 8px;
+    padding: 8px 16px 8px 16px;
     border-radius: 8px;
 }
 
 .logout-button:hover {
     background-color: #ffe470;
     transition: all;
+}
+
+.caution {
+    color: #2b333b;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
 }

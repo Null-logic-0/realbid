@@ -12,6 +12,7 @@
 .env/*
 .env.test
 .env.local
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -34,3 +35,4 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+config/credentials.yml.enc
