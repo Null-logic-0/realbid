@@ -19,6 +19,7 @@
     width: 100%;
     max-width: 350px;
     position: fixed;
+    z-index: 10000;
     top: 10px;
     display: flex;
     justify-content: center;

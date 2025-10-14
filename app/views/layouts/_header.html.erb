@@ -1,24 +1,51 @@
-<header class="nav-header">
+<header class="nav-header" data-controller="burger" data-action="keydown@document->burger#handleKeydown">
   <nav class="navbar">
     <div class="nav-logo">
       <%= render "shared/logo" %>
-      <h1>
-        RealBid
-      </h1>
+      <%= link_to "RealBid", products_path, class: "logo-text" %>
     </div>
 
+    <!-- Desktop Menu -->
     <ul class="nav-menu">
-      <li class="nav-list"><%= nav_link_to "Products", "#" %></li>
-
+      <li class="nav-list"><%= nav_link_to "Products", products_path %></li>
       <li class="nav-list"><%= nav_link_to "My Auctions", "#" %></li>
-      <li class="nav-list"><%= nav_link_to "Add Product", "#" %></li>
+      <li class="nav-list"><%= nav_link_to "My Orders", "#" %></li>
+      <li class="nav-list"><%= nav_link_to "Add Product", new_product_path %></li>
       <li class="nav-list"><%= nav_link_to "Profile", profile_path %></li>
       <li>
-        <%= link_to "Logout", logout_path,
+        <%= link_to "Logout",
+                    logout_url,
                     data: { turbo_method: :delete },
                     class: "logout-button" %>
       </li>
-
     </ul>
+
+    <!-- Burger Button -->
+    <button class="burger-btn" data-action="click->burger#open">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <!-- Slide-in Burger Menu -->
+  <aside class="burger-menu" data-burger-target="menu">
+    <button class="close-btn" data-action="click->burger#close">&times;</button>
+    <ul>
+      <li class="nav-list"><%= nav_link_to "Products", products_path %></li>
+      <li class="nav-list"><%= nav_link_to "My Auctions", "#" %></li>
+      <li class="nav-list"><%= nav_link_to "My Orders", "#" %></li>
+      <li class="nav-list"><%= nav_link_to "Add Product", new_product_path %></li>
+      <li class="nav-list"><%= nav_link_to "Profile", profile_path %></li>
+      <li>
+        <%= link_to "Logout",
+                    logout_url,
+                    data: { turbo_method: :delete },
+                    class: "logout-button" %>
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Backdrop -->
+  <div class="menu-backdrop" data-burger-target="backdrop" data-action="click->burger#close"></div>
 </header>

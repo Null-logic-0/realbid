@@ -1,0 +1,4 @@
+<%= turbo_stream_from "product_#{@product.id}_show" %>
+
+<%= render partial: "products/product_show", locals: { product: @product } %>
+

@@ -1,0 +1,44 @@
+<div id="product_<%= product.id %>" class="product">
+  <div class="product-action-container">
+    <% if current_user == product.user %>
+      <%= render "dropdown" do %>
+
+        <li><%= link_to "Edit product", edit_product_path(product), class: "product-action-menu_item" %></li>
+        <li><%= render "shared/modal",
+                       button_text: "Delete product",
+                       button_class: "product-action-menu_item",
+                       body: "<p class=caution >Do you really want to delete your product?</p>".html_safe,
+                       footer: button_to("Delete", product_path(product), method: :delete, class: "danger-button") %></li>
+
+      <% end %>
+    <% end %>
+
+    <% if product.auction_ended? %>
+      <p class="sold-out">Sold Out</p>
+    <% end %>
+
+
+    <% if product.product_image.attached? %>
+      <%= image_tag url_for(product.product_image), class: "product-image" %>
+    <% end %>
+
+  </div>
+
+
+  <div class="product-container">
+    <h2 class="product-title"><%= product.title %> </h2>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <div class="product-info">
+        <p>Current Bid</p>
+        <p class="price">$
+          <%= product.starting_bid %>
+        </p>
+        <p><i class="fa-solid fa-clock"></i>
+          <%= product.auction_ended? ? "ended" : product.time_left %>
+        </p>
+      </div>
+      <p><i class="fa-solid fa-coins"></i> 24 bids</p>
+    </div>
+    <%= link_to "Place Bid", product_path(product), class: "submit-button" %>
+  </div>
+</div>

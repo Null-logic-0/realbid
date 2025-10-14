@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  # root "posts#index"
+  root "products#index"
+
+  resources :products
 
   resource :session, only: [ :new, :create, :destroy ]
   get "login", to: "sessions#new", as: "login"

@@ -1,0 +1,21 @@
+<div class="image-upload-container" data-controller="image-uploader">
+  <%= form.label field_name, label_text %>
+
+  <div data-image-uploader-target="dropZone" class="drop-zone">
+    <% if object.persisted? && object.public_send(field_name).attached? %>
+      <img src="<%= url_for(object.public_send(field_name)) %>" class="preview-image" alt="preview">
+    <% else %>
+      Drag & Drop your image here or click to select
+    <% end %>
+  </div>
+
+  <div data-image-uploader-target="preview" class="image-preview"></div>
+
+  <%= form.file_field field_name,
+                      data: { image_uploader_target: "fileInput" },
+                      style: "display:none" %>
+
+  <% if object.errors[field_name].any? %>
+    <div class="field-error"><%= object.errors[field_name].first %></div>
+  <% end %>
+</div>

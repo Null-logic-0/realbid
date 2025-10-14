@@ -1,0 +1,9 @@
+<h1>Live Auctions</h1>
+<p>Discover amazing deals and place your bids</p>
+
+<%= turbo_stream_from "products" %>
+
+<div id="products" class="products">
+  <%= render @products %>
+  
+</div>

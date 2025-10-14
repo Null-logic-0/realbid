@@ -1,0 +1,53 @@
+<%= form_with(model: product, data: { turbo_stream: true }, class: "form-container wrapper") do |f| %>
+
+  <div class="auction-form-heading">
+    <h1><%= product.persisted? ? "Edit #{product.title}" : "Create New Auction" %></h1>
+    <p><%= product.persisted? ? "Update your item and start receiving bids" : "List your item and start receiving bids" %></p>
+  </div>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, autofocus: true, placeholder: "e.g., Vintage Leather Jacket" %>
+  <% if product.errors[:title].any? %>
+    <div class="field-error"><%= product.errors[:title].first %></div>
+  <% end %>
+
+  <%= f.label :description %>
+  <%= f.text_area :description, placeholder: "Describe your product..." %>
+  <% if product.errors[:description].any? %>
+    <div class="field-error"><%= product.errors[:description].first %></div>
+  <% end %>
+
+  <div class="row">
+    <div class="column">
+      <%= f.label :starting_bid %>
+      <%= f.number_field :starting_bid, placeholder: "25" %>
+      <% if product.errors[:starting_bid].any? %>
+        <div class="field-error"><%= product.errors[:starting_bid].first %></div>
+      <% end %>
+    </div>
+
+    <div class="column">
+      <%= f.label :auction_duration, "Auction Duration" %>
+      <%= f.select :auction_duration, Product.auction_durations.keys.map { |k| [k.humanize, k] }, prompt: "Select Duration" %>
+      <% if product.errors[:auction_duration].any? %>
+        <div class="field-error"><%= product.errors[:auction_duration].first %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render "shared/image-uploader",
+             form: f,
+             object: @product,
+             field_name: :product_image,
+             label_text: "Product Image" %>
+
+
+  <div class="row">
+
+    <button type="submit" class="submit-button">
+      <%= product.persisted? ? "Update Auction" : "Create Auction" %>
+    </button>
+    <%= link_to "Cancel", products_path, class: "secondary-button" %>
+  </div>
+
+<% end %>

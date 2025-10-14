@@ -1,60 +1,160 @@
-
+/* --- Header Layout --- */
 .nav-header {
-    padding: 16px;
-    background: #ffffff;
-    border-bottom: 1px solid #e0e5eb;
-    margin-bottom: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    position: relative;
+    z-index: 10;
 }
-
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1500px;
     width: 100%;
-
+    max-width: 1500px;
+    margin: 0 auto;
 }
+
 
 .nav-logo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-    color: black;
-    cursor: pointer;
+    gap: 8px;
+
 }
 
-h1 a {
-    color: #2b333b
+.logo-text {
+    text-decoration: none;
+    color: #2b333b;
+    font-size: 28px;
+    font-weight: bold;
 }
 
+
+/* --- Desktop Menu --- */
 .nav-menu {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-
+    gap: 0.5rem;
+    list-style: none;
 }
 
+
 .nav-list a {
-    color: #2b333b;
-    font-weight: 500;
+    text-decoration: none;
+    color: #333;
     font-size: 14px;
+    font-weight: 500;
+    border: none;
+    width: 100%;
     padding: 8px 16px 8px 16px;
     border-radius: 8px;
 }
 
 .nav-list a:hover {
-    background-color: #1f8fff;
-    color: white !important;
-    transition: all;
+    background: #1f8fff;
+    color: #fafafa
 }
 
 .active {
-    background-color: #1f8fff;
-    color: white !important;
+    background: #1f8fff;
+    color: #fafafa !important;
+}
+
+
+/* --- Burger Button --- */
+.burger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 30;
+}
+
+.burger-btn span {
+    display: block;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* --- Slide-in Burger Menu --- */
+.burger-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 320px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.15);
+    padding: 2rem 1.5rem;
+    transition: right 0.4s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.burger-menu.open {
+    right: 0;
+}
+
+.burger-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.burger-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #333;
+}
+
+/* --- Backdrop --- */
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 20;
+}
+
+.menu-backdrop.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .burger-btn {
+        display: flex;
+    }
 }

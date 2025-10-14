@@ -1,20 +1,25 @@
-<%= form_with(model: @user, url: update_profile_path, method: :patch, data: { turbo_stream: true }, class: "profile-form-container wrapper") do |f| %>
+<%= render "shared/modal",
+           button_text: "Update Account",
+           button_class: "submit-button" do %>
+  <%= form_with(model: @user, url: update_profile_path, method: :patch, data: { turbo_stream: true }, class: "profile-form-container") do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name, autofocus: true %>
-  <% if @user.errors[:name].any? %>
-    <div class="field-error"><%= @user.errors[:name].first %></div>
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true %>
+    <% if @user.errors[:name].any? %>
+      <div class="field-error"><%= @user.errors[:name].first %></div>
+    <% end %>
+
+
+    <%= render "shared/image-uploader",
+               form: f,
+               object: @user,
+               field_name: :profile_image,
+               label_text: "Profile Image" %>
+
+    <button type="submit" class="submit-button">
+      Update profile
+    </button>
+
+
   <% end %>
-
-  <%= f.label :profile_image %>
-  <%= f.file_field :profile_image, class: "image-uploader" %>
-  <% if @user.errors[:profile_image].any? %>
-    <div class="field-error"><%= @user.errors[:profile_image].first %></div>
-  <% end %>
-
-  <button type="submit" class="submit-button">
-    Update profile
-  </button>
-
-
 <% end %>

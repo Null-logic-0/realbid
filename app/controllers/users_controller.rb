@@ -55,9 +55,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.destroy
       reset_session
-      flash[:alert] = "Account has been deleted."
-      redirect_to signup_url,
-                  status: :see_other
+      redirect_to signup_url, alert: "Account has been deleted."
     else
       flash[:alert] = "You can only delete your own account!"
       render :show, status: :unprocessable_entity

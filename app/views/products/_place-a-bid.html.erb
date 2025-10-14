@@ -1,0 +1,22 @@
+<%= render "shared/modal",
+           button_text: "Place a Bid",
+           button_class: "submit-button" do %>
+  <%= form_with(model: product, url: "", method: :patch, data: { turbo_stream: true }, class: "bid-form") do |f| %>
+
+    <p class="bid-caution">
+      <strong>⚠️ Caution:</strong><br/> Placing a bid is a binding commitment.<br/> Make sure you want to proceed.
+    </p>
+    <div class="bid-container">
+      <%= f.number_field placeholder: "24" %>
+      <button type="submit" class="bid-submit">
+        <i class="fa-solid fa-coins"></i>
+      </button>
+    </div>
+
+
+
+  <% end %>
+<% end %>
+
+
+

@@ -13,12 +13,16 @@ class SessionsController < ApplicationController
       create_session_for(user)
       redirect_to profile_path, notice: "Welcome back, #{user.name}!"
     else
-      redirect_to login_path, alert: "Invalid email or password"
+      flash.now[:alert] = "Invalid email or password"
+      render :new, status: :unauthorized
     end
   end
 
   def destroy
     reset_session
-    redirect_to login_path, notice: "You have successfully logged out!"
+    redirect_to login_url, notice: "You have been logged out."
+  rescue => e
+    Rails.logger.error("Logout failed: #{e.message}")
+    redirect_to profile_path, alert: "Oops, something went wrong."
   end
 end

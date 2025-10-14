@@ -9,12 +9,15 @@
   </button>
 
   <!-- Modal -->
+
+
   <div
     data-modal-target="modal"
     class="modal"
     role="dialog"
     aria-modal="true"
     data-action="click->modal#close"
+
   >
     <div class="modal-content" data-action="click->modal#stopPropagation">
       <!-- Close icon -->
@@ -22,14 +25,21 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <%= body %>
+        <% if local_assigns[:body].present? %>
+          <%= body %>
+        <% else %>
+          <%= yield if block_given? %>
+        <% end %>
+
       </div>
 
       <!-- Modal footer -->
-      <div class="modal-footer">
-        <button data-action="click->modal#close" class="secondary-button">Cancel</button>
-        <%= footer %>
-      </div>
+      <% if local_assigns[:footer].present? %>
+        <div class="modal-footer">
+          <button data-action="click->modal#close" class="secondary-button">Cancel</button>
+          <%= footer %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

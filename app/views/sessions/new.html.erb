@@ -1,5 +1,5 @@
 <div class="auth-container">
-  <%= form_with(url: session_path, scope: :user, class: "auth-form wrapper") do |f| %>
+  <%= form_with(url: session_path, method: :post, scope: :user, class: "auth-form wrapper") do |f| %>
     <div class="form-heading">
       <%= render "shared/logo" %>
       <h1>Welcome Back</h1>
@@ -21,7 +21,7 @@
     <p class="form-link">
       Don't have an account?
       <span class="link">
-        <%= link_to "Sign up", signup_url %>
+        <%= link_to "Sign up", signup_path %>
       </span>
     </p>
   <% end %>

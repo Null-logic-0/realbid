@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  before_save :capitalize_name, :lowercase_email
+  has_many :products, dependent: :destroy
+
+  before_save :upcase_name, :lowercase_email
 
   has_one_attached :profile_image, dependent: :destroy
 
@@ -29,8 +31,8 @@ class User < ApplicationRecord
     end
   end
 
-  def capitalize_name
-    self.name = name.capitalize if name.present?
+  def upcase_name
+    self.name = name.upcase if name.present?
   end
 
   def lowercase_email

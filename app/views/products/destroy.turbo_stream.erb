@@ -1,0 +1,11 @@
+<turbo-stream action="remove" target="product_<%= @product.id %>_show"></turbo-stream>
+
+<% if request.path == product_path(@product) %>
+  <turbo-stream action="prepend" target="body">
+    <template>
+      <script>
+		  window.location.href = "<%= products_path %>";
+      </script>
+    </template>
+  </turbo-stream>
+<% end %>
