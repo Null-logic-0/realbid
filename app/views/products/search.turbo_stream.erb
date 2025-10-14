@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "products" do %>
+  <% if @products.any? %>
+    <div class="products">
+      <%= render @products %>
+    </div>
+
+  <% else %>
+    <div id="no-results" class="no-results">
+      <p>No products found matching "<%= @query %>"</p>
+    </div>
+  <% end %>
+<% end %>

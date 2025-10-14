@@ -3,11 +3,10 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @products = Product.order(created_at: :desc)
+    @products = Product.order(created_at: :desc).page(params[:page]).per(10)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
@@ -24,8 +23,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -45,6 +43,34 @@ class ProductsController < ApplicationController
     else
       flash.now[:alert] = "Failed to delete product!"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def search
+    products_scope = params[:scope] == "my_auctions" ? current_user&.products : Product.all
+
+    if params[:query].present? && params[:query].strip != ""
+      @query = params[:query].strip
+      @products = products_scope&.where("lower(title) LIKE ?", "%#{@query&.downcase}%")
+    else
+      @query = nil
+      @products = products_scope
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
+
+  def my_auctions
+    @products = current_user&.products&.order(created_at: :desc)&.page(params[:page]).per(10)
+
+    @my_search = true
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
     end
   end
 

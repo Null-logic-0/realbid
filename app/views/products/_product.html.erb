@@ -26,7 +26,12 @@
 
 
   <div class="product-container">
-    <h2 class="product-title"><%= product.title %> </h2>
+    <% if @query.present? %>
+      <h2 class="product-title highlighted"><%= product.title %></h2>
+    <% else %>
+      <h2 class="product-title"><%= product.title %></h2>
+    <% end %>
+
     <div style="display: flex; justify-content: space-between; align-items: center">
       <div class="product-info">
         <p>Current Bid</p>

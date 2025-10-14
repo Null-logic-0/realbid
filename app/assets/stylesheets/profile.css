@@ -23,7 +23,13 @@
     align-items: center;
     padding: 24px;
     width: 100%;
+}
 
+@media (max-width: 640px) {
+    .profile {
+        justify-content: center;
+        gap: 0.5rem
+    }
 }
 
 .profile-form-container {
@@ -63,6 +69,12 @@
     flex-direction: column;
     gap: 0.5rem;
     justify-content: center;
+}
+
+@media (max-width: 640px) {
+    .wallet-balance {
+        width: 100%;
+    }
 }
 
 .amount {

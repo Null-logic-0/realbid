@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   root "products#index"
 
-  resources :products
+  resources :products do
+    collection do
+      get :search
+      get :my_auctions
+    end
+  end
 
   resource :session, only: [ :new, :create, :destroy ]
   get "login", to: "sessions#new", as: "login"

@@ -1,7 +1,7 @@
 <div class="auction-main-heading">
   <div>
-    <h1>Live Auctions</h1>
-    <p>Discover amazing deals and place your bids</p>
+    <h1>My Auctions</h1>
+    <p>All the auctions you created are listed below:</p>
   </div>
 
   <%= render "products/search" %>
@@ -9,22 +9,18 @@
 </div>
 
 
-<%= turbo_stream_from "products" %>
 
 <div id="products" class="products">
   <% if @products.any? %>
     <%= render @products %>
   <% else %>
     <p>You haven’t created any auctions yet.</p>
-
   <% end %>
-
 </div>
+
 
 <% if @products.any? %>
   <div class="pagination">
     <%= paginate @products %>
   </div>
 <% end %>
-
-
