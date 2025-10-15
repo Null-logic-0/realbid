@@ -67,7 +67,11 @@
 
     <div id="bids" class="wrapper user-bids-wrapper">
       <%= turbo_stream_from "bids" %>
-      <%= render @bids %>
+      <% if @bids.present? %>
+        <%= render @bids %>
+      <% else %>
+        <p>No bids yet!</p>
+      <% end %>
     </div>
   </div>
 </div>

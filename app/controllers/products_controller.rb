@@ -29,6 +29,8 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
+      @bids = @product.bids
+
       redirect_to products_path, notice: "Product successfully updated!"
     else
       flash.now[:alert] = "Something went wrong"
