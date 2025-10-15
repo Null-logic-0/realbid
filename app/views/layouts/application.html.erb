@@ -26,10 +26,22 @@
 
 <body>
 <%= render "layouts/flash" %>
+<% unless auth_page? %>
+  <% if current_user.present? %>
+    <div id="notifications">
+      <%= turbo_stream_from current_user %>
+    </div>
+  <% end %>
+<% end %>
+
+
 
 <% unless auth_page? %>
   <%= render "layouts/header" %>
 <% end %>
+
+
+
 
 <main class="main-container">
   <%= yield %>

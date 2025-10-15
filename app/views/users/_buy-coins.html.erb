@@ -1,0 +1,51 @@
+<div class="wrapper coins-container">
+  <h1>Buy More Coins</h1>
+
+
+  <div class="coins">
+    <button class="coin" data-price="2500" data-coins="25">
+      <p class="coin-value">25 Coins</p>
+      <p class="coin-price">$25</p>
+    </button>
+
+    <button class="coin" data-price="4800" data-coins="50">
+      <p class="coin-value">50 Coins</p>
+      <p class="coin-price">$48</p>
+    </button>
+
+    <button class="coin" data-price="9000" data-coins="100">
+      <p class="coin-value">100 Coins</p>
+      <p class="coin-price">$90</p>
+    </button>
+
+    <button class="coin" data-price="20000" data-coins="250">
+      <p class="coin-value">250 Coins</p>
+      <p class="coin-price">$200</p>
+    </button>
+  </div>
+
+</div>
+
+<script type="module">
+	document.querySelectorAll('.coin').forEach(button => {
+		button.addEventListener('click', async () => {
+			const price = button.dataset.price;
+			const coins = button.dataset.coins;
+
+			const response = await fetch('/create-checkout-session', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+				},
+				body: JSON.stringify({price, coins})
+			});
+
+			const session = await response.json();
+
+			// Redirect to Stripe Checkout
+			window.location = session.url;
+		});
+	});
+</script>

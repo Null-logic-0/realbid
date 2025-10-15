@@ -1,0 +1,34 @@
+<%= render "shared/modal",
+           product: @product,
+           button_text: "Place a Bid",
+           button_class: "submit-button" do %>
+  <%= form_with model: [product, Bid.new], class: "bid-form", data: { turbo_stream: true } do |f| %>
+
+    <p class="bid-caution">Current Highest Bid: $<%= product.bids.maximum(:amount) || 0 %></p>
+
+    <p class="bid-caution">
+      <strong>⚠️ Caution:</strong><br/> Placing a bid is a binding commitment.<br/> Make sure you want to proceed.
+    </p>
+    <div class="bid-container">
+      <%= f.number_field :amount,
+                         name: "bid[amount]",
+                         min: (product.bids.maximum(:amount) || product.starting_bid) + 1,
+                         step: 1,
+                         required: true,
+                         placeholder: "Enter your bid" %>
+
+
+
+
+      <button type="submit" class="bid-submit">
+        <i class="fa-solid fa-coins"></i>
+      </button>
+    </div>
+
+
+
+  <% end %>
+<% end %>
+
+
+

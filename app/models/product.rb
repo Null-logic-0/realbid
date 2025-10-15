@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   before_save :capitalize_title
 
   belongs_to :user
+  has_many :bids, dependent: :destroy
 
   has_one_attached :product_image
 
@@ -13,7 +14,7 @@ class Product < ApplicationRecord
   validates :title, presence: true, length: { minimum: 3, allow_blank: true }
   validates :description, presence: true,
             length: { minimum: 10, allow_blank: true, maximum: 200 }
-  validates :starting_bid, presence: true
+  validates :starting_bid, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :auction_duration, presence: true
   validate :acceptable_image
 

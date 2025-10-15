@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem 'kaminari'
+gem "stripe"
 gem "dotenv-rails", groups: [:development, :test]
 
 gem "rails", "~> 8.0.3"

@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image, dependent: :destroy
 
+  has_many :bids
+
+  has_many :notifications, dependent: :destroy
+
   validates :name, presence: true
   validates :email, format: {
     with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,

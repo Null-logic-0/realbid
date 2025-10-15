@@ -35,7 +35,8 @@
 
     <div class="product-info wrapper">
       <p>Current Bid</p>
-      <p class="price">$
+      <p class="price">
+        <i class="fa-solid fa-coins"></i>
         <%= product.starting_bid %>
       </p>
       <div style="display:flex; justify-content: space-between;margin-bottom: 16px;">
@@ -45,15 +46,28 @@
           <i class="fa-solid fa-clock"></i>
           <%= product.auction_ended? ? "ended" : product.time_left %>
         </p>
-        <p><i class="fa-solid fa-coins"></i> 24 bids</p>
+        <p>
+          <i class="fa-solid fa-coins"></i>
+          <%= pluralize(product.bids.count, "bid") %>
+        </p>
       </div>
       <% if product.auction_ended? %>
-        <p style="text-align: center; color: #a70000; font-size: 22px;font-weight: bold">Sold Out</p>
+        <p style="text-align: center; color: #a70000; font-size: 22px;font-weight: bold">
+          Sold Out
+        </p>
+      <% elsif seller?(product) %>
+        <p style="text-align: center; color: #a70000; font-size: 22px;font-weight: bold">Seller cannot bid on their own
+          product! </p>
       <% else %>
-        <%= render "products/place-a-bid", product: product %>
+        <%= render "bids/place-a-bid", product: product %>
       <% end %>
+
 
     </div>
 
+    <div id="bids" class="wrapper user-bids-wrapper">
+      <%= turbo_stream_from "bids" %>
+      <%= render @bids %>
+    </div>
   </div>
 </div>

@@ -1,0 +1,31 @@
+<div class="bid-info-container"
+     id="<%= dom_id(bid) %>">
+
+  <div class="bid-info">
+    <% if bid.user.profile_image.attached? %>
+      <div class="bid-user-profile-image">
+        <%= profile_image(bid.user) %>
+      </div>
+    <% end %>
+    <div>
+      <p style="font-weight: bold; font-size: 16px; color: #261B23">
+        <%= bid.user.name %>
+      </p>
+      <p>
+        <em>(<%= time_ago_in_words(bid.created_at) %> ago)</em>
+      </p>
+    </div>
+    <i class="fa-solid fa-minus"></i>
+    <p class="bid-amount">
+      <i class="fa-solid fa-coins"></i>
+      <%= bid.amount %>
+    </p>
+  </div>
+
+
+  <button class="bid-button" title="Sell">
+    <i class="fa-solid fa-money-bill-trend-up"></i>
+  </button>
+</div>
+
+

@@ -91,3 +91,56 @@
 
 }
 
+/* Buy Coins */
+
+
+.coins-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.coins {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+}
+
+@media (max-width: 640px) {
+    .coins {
+        grid-template-columns: 1fr;
+    }
+}
+
+.coin {
+    background: #fafafa;
+    border: 1px solid #e0e5eb;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.coin:hover {
+    background: #ffd900;
+    transition: all;
+}
+
+.coin-value {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #2b333b;
+}
+
+.coin-price {
+    font-weight: bold;
+    font-size: 1rem;
+
+}

@@ -35,15 +35,16 @@
     <div style="display: flex; justify-content: space-between; align-items: center">
       <div class="product-info">
         <p>Current Bid</p>
-        <p class="price">$
+        <p class="price">
+          <i class="fa-solid fa-coins"></i>
           <%= product.starting_bid %>
         </p>
         <p><i class="fa-solid fa-clock"></i>
           <%= product.auction_ended? ? "ended" : product.time_left %>
         </p>
       </div>
-      <p><i class="fa-solid fa-coins"></i> 24 bids</p>
+      <p><i class="fa-solid fa-coins"></i>  <%= pluralize(product.bids.count, "bid") %></p>
     </div>
-    <%= link_to "Place Bid", product_path(product), class: "submit-button" %>
+    <%= link_to "View Product", product_path(product), class: "submit-button" %>
   </div>
 </div>

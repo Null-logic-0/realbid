@@ -6,7 +6,9 @@ class ProductsController < ApplicationController
     @products = Product.order(created_at: :desc).page(params[:page]).per(10)
   end
 
-  def show; end
+  def show
+    @bids = @product.bids.order(created_at: :desc)
+  end
 
   def new
     @product = Product.new

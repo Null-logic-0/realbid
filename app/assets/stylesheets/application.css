@@ -257,7 +257,8 @@ input, textarea, select {
     background-color: #1f8fff;
     color: white;
     pointer-events: none;
-    pointer-events: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
 }
+
+

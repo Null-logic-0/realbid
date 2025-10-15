@@ -1,13 +1,34 @@
 Rails.application.routes.draw do
   root "products#index"
 
+  # Webhooks
+  get "webhooks/create"
+
+  post "/webhooks", to: "webhooks#create"
+
+  # Payments
+  post "/create-checkout-session", to: "payments#create"
+  get "/payments/success", to: "payments#success", as: "success_payments"
+  get "/payments/cancel", to: "payments#cancel", as: "cancel_payments"
+  get "payments/create"
+  get "payments/success"
+  get "payments/cancel"
+
+  # Products and bids
   resources :products do
+    resources :bids, only: [ :create ]
     collection do
       get :search
       get :my_auctions
     end
   end
 
+  # Notifications
+  resources :notifications do
+    post :mark_as_read, on: :member
+  end
+
+  # Sessions
   resource :session, only: [ :new, :create, :destroy ]
   get "login", to: "sessions#new", as: "login"
   delete "logout", to: "sessions#destroy", as: "logout"
