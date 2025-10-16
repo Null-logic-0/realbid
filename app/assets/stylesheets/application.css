@@ -6,6 +6,7 @@
 @import "auction.css";
 @import "image-uploader.css";
 @import "dropdown-menu.css";
+@import "orders.css";
 
 /* Global Styles */
 
@@ -117,7 +118,15 @@ input, textarea, select {
     cursor: pointer;
     text-align: center;
 
+}
 
+.submit-button.disabled {
+    cursor: not-allowed;
+    background-color: #74808d;
+}
+
+.submit-button.disabled:hover {
+    background-color: #74808d;
 }
 
 .submit-button:hover {

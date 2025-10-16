@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :products, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   before_save :upcase_name, :lowercase_email
 
@@ -19,6 +20,10 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 10, allow_blank: true }
 
   validate :acceptable_image
+
+  def total_order_amount
+    orders.sum(:amount)
+  end
 
   private
 

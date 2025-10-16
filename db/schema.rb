@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_15_101843) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_16_105453) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,6 +60,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_101843) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_orders_on_product_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -68,6 +78,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_101843) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.string "auction_status"
+    t.integer "winner_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -85,5 +97,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_15_101843) do
   add_foreign_key "bids", "products"
   add_foreign_key "bids", "users"
   add_foreign_key "notifications", "users"
+  add_foreign_key "orders", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "users"
 end

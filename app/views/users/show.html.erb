@@ -13,13 +13,24 @@
 
       </div>
 
-      <div class="wallet-balance">
+      <div class="wallet">
+        <div class="wallet-balance wallet-coins">
      <span class="amount">
        <%= @user.wallet_balance %>
        <i class="fa-solid fa-coins"></i>
      </span>
-        <p>Coins Available</p>
+          <p>Coins Available</p>
+        </div>
+
+        <div class="wallet-balance wallet-money">
+     <span class="money">
+       <%= number_to_currency(@user.total_order_amount, unit: "$") %>
+     </span>
+          <p>Wallet Balance</p>
+        </div>
       </div>
+
+
     </div>
     <%= render "update-profile" %>
   </div>

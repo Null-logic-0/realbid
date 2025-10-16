@@ -4,6 +4,10 @@ class BidsController < ApplicationController
   before_action :prevent_seller_bidding, only: [ :create ]
 
   def create
+    if @product.ended? || @product.auction_ended?
+      redirect_to product_path(@product), alert: "This auction has already ended."
+      return
+    end
     @bid = @product.bids.build(bid_params.merge(user: current_user))
 
     if @bid.save

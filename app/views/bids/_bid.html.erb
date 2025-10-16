@@ -23,9 +23,15 @@
   </div>
 
 
-  <button class="bid-button" title="Sell">
-    <i class="fa-solid fa-money-bill-trend-up"></i>
-  </button>
+  <% if bid.user != current_user && bid.product.active? %>
+    <%= button_to end_auction_product_path(bid.product),
+                  method: :post,
+                  data: { turbo_confirm: "End auction now?" },
+                  class: "bid-button flex items-center justify-center p-2 rounded-full bg-red-600 hover:bg-red-700 text-white",
+                  title: "Sell" do %>
+      <i class="fa-solid fa-money-bill-trend-up"></i>
+    <% end %>
+  <% end %>
 </div>
 
 

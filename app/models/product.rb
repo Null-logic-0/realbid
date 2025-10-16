@@ -1,10 +1,20 @@
 class Product < ApplicationRecord
   before_save :capitalize_title
+  after_create :schedule_auction_end
 
   belongs_to :user
   has_many :bids, dependent: :destroy
 
   has_one_attached :product_image
+
+  belongs_to :winner, class_name: "User", optional: true
+
+  enum :auction_status, {
+    active: "active",
+    ended: "ended"
+  }
+
+  after_initialize :set_default_status
 
   enum :auction_duration, { "12_hours" => 12,
                             "24_hours" => 24,
@@ -67,6 +77,15 @@ class Product < ApplicationRecord
                          target: "product_#{self.id}_show"
   }, on: :update
 
+  after_update_commit :broadcast_auction_status, if: :saved_change_to_auction_status?
+
+  def broadcast_auction_status
+    broadcast_replace_to "product_#{id}_show",
+                         target: "auction_status_#{id}",
+                         partial: "products/auction_status",
+                         locals: { product: self }
+  end
+
   after_commit -> {
     # Remove from index
     broadcast_remove_to "products"
@@ -85,7 +104,55 @@ class Product < ApplicationRecord
     )
   }, on: :destroy
 
+  # end auction operation
+  def end_auction!
+    return if ended?
+
+    transaction do
+      highest = highest_bid
+
+      if highest.present?
+        update!(auction_status: "ended", winner: highest.user)
+
+        Order.create!(
+          user: highest.user,
+          product: self,
+          amount: highest.amount
+        )
+
+        Notification.new(
+          user: highest.user,
+          message: "You won the auction for #{title} with a bid of #{highest.amount} coins!"
+        ).broadcast
+
+        Notification.new(
+          user: user,
+          message: "Your product #{title} was sold to #{highest.user.name} for #{highest.amount} coins."
+        ).broadcast
+      else
+        update!(auction_status: "ended")
+        Notification.new(user: user, message: "Your auction for #{title} ended with no bids.").broadcast
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    Rails.logger.error("Failed to end auction for product #{id}: #{e.message}")
+    raise
+  end
+
+  def schedule_auction_end
+    EndAuctionJob.set(wait: auction_duration_before_type_cast.hours).perform_later(id)
+  end
+
   private
+
+  def set_default_status
+    self.auction_status ||= :active
+  end
+
+  # highest bid helper
+  def highest_bid
+    bids.order(amount: :desc).first
+  end
 
   def acceptable_image
     return unless product_image.attached?

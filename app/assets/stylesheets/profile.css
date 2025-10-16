@@ -59,9 +59,14 @@
     gap: 1rem;
 }
 
+.wallet {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
 .wallet-balance {
-    background: #fffbe5;
-    border: 1px solid #ffd900;
     border-radius: 8px;
     padding: 16px;
     display: flex;
@@ -69,12 +74,33 @@
     flex-direction: column;
     gap: 0.5rem;
     justify-content: center;
+    cursor: pointer;
+}
+
+.wallet-coins {
+    background: #fffbe5;
+    border: 1px solid #ffd900;
+}
+
+.wallet-money {
+    background: #B9D4AA;
+    border: 1px solid #38761d;
 }
 
 @media (max-width: 640px) {
     .wallet-balance {
         width: 100%;
     }
+
+    .wallet {
+        margin-top: 16px;
+    }
+}
+
+.money {
+    font-weight: bold;
+    font-size: 2rem;
+    color: #38761d;
 }
 
 .amount {

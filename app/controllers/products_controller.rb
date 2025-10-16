@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :require_login
-  before_action :set_product, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_product, only: [ :show, :edit, :update, :destroy, :end_auction ]
 
   def index
     @products = Product.order(created_at: :desc).page(params[:page]).per(10)
@@ -47,6 +47,15 @@ class ProductsController < ApplicationController
     else
       flash.now[:alert] = "Failed to delete product!"
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def end_auction
+    if @product.user == current_user
+      @product.end_auction!
+      redirect_to product_path(@product), notice: "Auction ended successfully!"
+    else
+      redirect_to product_path(@product), alert: "You are not authorized to end this auction."
     end
   end
 

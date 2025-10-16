@@ -10,11 +10,14 @@
 
 
   <div class="product-info-wrapper">
-    <% if product.auction_ended? %>
-      <span class="product-sold">Sold Out</span>
-    <% else %>
-      <span class="product-active">Active Auction</span>
-    <% end %>
+    <div id="auction_status_<%= product.id %>">
+      <% if product.auction_ended? || product.ended? %>
+        <span class="product-sold">Sold Out</span>
+      <% else %>
+        <span class="product-active">Active Auction — <%= product.time_left %> </span>
+      <% end %>
+    </div>
+
     <h1><%= product.title %></h1>
     <div class="wrapper">
       <p class="product-description">
@@ -55,10 +58,8 @@
         <p style="text-align: center; color: #a70000; font-size: 22px;font-weight: bold">
           Sold Out
         </p>
-      <% elsif seller?(product) %>
-        <p style="text-align: center; color: #a70000; font-size: 22px;font-weight: bold">Seller cannot bid on their own
-          product! </p>
       <% else %>
+
         <%= render "bids/place-a-bid", product: product %>
       <% end %>
 

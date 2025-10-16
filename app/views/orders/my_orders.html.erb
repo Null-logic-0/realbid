@@ -1,0 +1,35 @@
+<div class="orders-container">
+  <h1>My Orders</h1>
+  <% @orders.each do |order| %>
+    <table class="wrapper orders-table">
+      <thead class="orders-thead">
+      <tr>
+        <th>Order</th>
+        <th>Price</th>
+        <th>Contact to User</th>
+      </tr>
+      </thead>
+      <tbody class="orders-tbody">
+      <tr>
+        <td>
+          <% if order.user.profile_image.attached? %>
+            <div class="bid-user-profile-image">
+              <%= profile_image(order.user) %>
+            </div>
+          <% end %>
+          <%= order.product.title %>
+        </td>
+        <td> <%= order.amount %> <i class="fa-solid fa-coins"></i></td>
+        <td class="td-button">
+          <%= button_to "Contact" %>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+
+
+

@@ -21,11 +21,16 @@ Rails.application.routes.draw do
       get :search
       get :my_auctions
     end
+    member do
+      post :end_auction
+    end
   end
 
-  # Notifications
-  resources :notifications do
-    post :mark_as_read, on: :member
+  # Orders
+  resources :orders do
+    collection do
+      get :my_orders
+    end
   end
 
   # Sessions

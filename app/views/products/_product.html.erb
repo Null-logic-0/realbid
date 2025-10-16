@@ -13,9 +13,12 @@
       <% end %>
     <% end %>
 
-    <% if product.auction_ended? %>
-      <p class="sold-out">Sold Out</p>
-    <% end %>
+    <div id="auction_status_<%= product.id %>">
+      <% if product.auction_ended? || product.ended? %>
+        <p class="sold-out">Sold Out</p>
+      <% end %>
+    </div>
+
 
 
     <% if product.product_image.attached? %>
