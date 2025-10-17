@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  root "products#index"
+  root to: redirect("/products")
+
+  # Global errors
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 
   # Webhooks
   get "webhooks/create"
-
   post "/webhooks", to: "webhooks#create"
 
   # Payments
