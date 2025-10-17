@@ -1,6 +1,7 @@
 <div class="orders-container">
   <h1>My Orders</h1>
-  <% @orders.each do |order| %>
+
+  <% if @orders.any? %>
     <table class="wrapper orders-table">
       <thead class="orders-thead">
       <tr>
@@ -9,27 +10,27 @@
         <th>Contact to User</th>
       </tr>
       </thead>
-      <tbody class="orders-tbody">
-      <tr>
-        <td>
-          <% if order.user.profile_image.attached? %>
-            <div class="bid-user-profile-image">
-              <%= profile_image(order.user) %>
-            </div>
-          <% end %>
-          <%= order.product.title %>
-        </td>
-        <td> <%= order.amount %> <i class="fa-solid fa-coins"></i></td>
-        <td class="td-button">
-          <%= button_to "Contact" %>
-        </td>
-      </tr>
 
-      </tbody>
+      <% @orders.each do |order| %>
+        <tbody class="orders-tbody">
+        <tr>
+          <td>
+            <% if order.product.product_image.attached? %>
+              <%= image_tag url_for(order.product.product_image), class: "order-product-image" %>
+            <% end %>
+            <%= link_to order.product.title, product_path(order.product) %>
+          </td>
+          <td>
+            <%= order.amount %> <i class="fa-solid fa-coins"></i>
+          </td>
+          <td>
+            <%= render "orders/seller_info", order: order %>
+          </td>
+        </tr>
+        </tbody>
+      <% end %>
     </table>
+  <% else %>
+    <p style="text-align: center">You don’t have any orders yet.</p>
   <% end %>
 </div>
-
-
-
-

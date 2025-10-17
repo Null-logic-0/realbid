@@ -1,0 +1,49 @@
+<%= render "shared/modal",
+           button_text: "Update Info",
+           button_class: "submit-button" do %>
+  <%= form_with(model: @user, url: update_info_path, method: :patch, data: { turbo_stream: true }, class: "form-container") do |f| %>
+
+    <%= f.label :country %>
+    <%= f.text_field :country, autofocus: true %>
+    <% if @user.errors[:country].any? %>
+      <div class="field-error"><%= @user.errors[:country].first %></div>
+    <% end %>
+
+
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+    <% if @user.errors[:city].any? %>
+      <div class="field-error"><%= @user.errors[:city].first %></div>
+    <% end %>
+
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <% if @user.errors[:address].any? %>
+      <div class="field-error"><%= @user.errors[:address].first %></div>
+    <% end %>
+
+
+
+
+    <%= f.label :phone_number %>
+    <%= f.phone_field :phone_number %>
+    <% if @user.errors[:phone_number].any? %>
+      <div class="field-error"><%= @user.errors[:phone_number].first %></div>
+    <% end %>
+
+
+    <%= f.label :postal_code %>
+    <%= f.text_field :postal_code %>
+    <% if @user.errors[:postal_code].any? %>
+      <div class="field-error"><%= @user.errors[:postal_code].first %></div>
+    <% end %>
+
+
+
+    <button type="submit" class="submit-button">
+      Update Info
+    </button>
+
+
+  <% end %>
+<% end %>

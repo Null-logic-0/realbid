@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :require_login
   before_action :set_product, only: [ :show, :edit, :update, :destroy, :end_auction ]
+  before_action :ensure_user_has_full_address, only: [ :create ]
+  before_action :ensure_no_orders, only: [ :destroy ]
 
   def index
     @products = Product.order(created_at: :desc).page(params[:page]).per(10)
@@ -88,6 +90,21 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def ensure_no_orders
+    if @product.orders.exists?
+      redirect_to products_path, alert: "Cannot delete this product because it has existing orders."
+    end
+  end
+
+  def ensure_user_has_full_address
+    required_fields = %i[address country postal_code phone_number city]
+
+    if required_fields.any? { |field| current_user.send(field).blank? }
+      redirect_to edit_user_path(current_user),
+                  alert: "Please complete your address information (address, country, postal code, phone number, and city) before creating a product."
+    end
+  end
 
   def set_product
     @product = Product.find(params[:id])

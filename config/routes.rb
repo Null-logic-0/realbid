@@ -45,9 +45,10 @@ Rails.application.routes.draw do
   # Current user profile
   get "profile", to: "users#profile", as: "profile"
 
-  # Separate routes for updating profile and password
+  # Separate routes for updating profile,user info and password
   patch "profile/update_profile", to: "users#update_profile", as: "update_profile"
   patch "profile/update_password", to: "users#update_password", as: "update_password"
+  patch "profile/update_info", to: "users#update_info", as: "update_info"
 
   # Delete account
   delete "profile", to: "users#delete_account", as: "delete_account"

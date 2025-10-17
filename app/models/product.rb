@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 
   belongs_to :user
   has_many :bids, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   has_one_attached :product_image
 

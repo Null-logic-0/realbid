@@ -1,0 +1,15 @@
+<%= render "shared/modal",
+           button_text: "Contact",
+           button_class: "td-button" do %>
+
+  <ul class="info-container">
+    <h2>Seller Information</h2>
+    <li><strong>Name</strong>: <%= order.user.name %></li>
+    <li><strong>Email</strong>: <%= order.user.email %></li>
+    <li><strong>Country</strong>: <%= order.user.country || "-" %></li>
+    <li><strong>City</strong>: <%= order.user.city || "-" %></li>
+    <li><strong>Address</strong>: <%= order.user.address || "-" %></li>
+    <li><strong>Postal Code</strong>: <%= order.user.postal_code || "-" %></li>
+    <li><strong>Phone Number</strong>: <%= order.user.phone_number || "-" %></li>
+  </ul>
+<% end %>

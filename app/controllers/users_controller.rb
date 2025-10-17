@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show
-  end
+  def show; end
 
   def profile
     @user = current_user
@@ -51,6 +50,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_info
+    @user = current_user
+    if @user.update(info_params.except(:current_password, :password, :password_confirmation, :email, :name, :profile_image).reject { |_, v| v.blank? })
+      redirect_to profile_path, notice: "You have successfully updated your info!"
+    else
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def delete_account
     @user = current_user
     if @user.destroy
@@ -63,6 +72,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def info_params
+    params.require(:user).permit(:country, :city, :address, :postal_code, :phone_number)
+  end
 
   def password_params
     params.require(:user).permit(:current_password, :password, :password_confirmation)

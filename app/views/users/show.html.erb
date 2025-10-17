@@ -24,7 +24,7 @@
 
         <div class="wallet-balance wallet-money">
      <span class="money">
-       <%= number_to_currency(@user.total_order_amount, unit: "$") %>
+       <%= number_to_currency(@user.my_balance, unit: "$") %>
      </span>
           <p>Wallet Balance</p>
         </div>
@@ -37,7 +37,30 @@
 
   <%= render "buy-coins" %>
 
-  <%= render "update-password" %>
+  <div class="profile-info-container">
+    <%= render "update-password" %>
+
+    <ul class="info-container wrapper">
+      <h2>Additional Information</h2>
+      <li>
+        <strong>Country</strong>: <%= @user.country || "-" %>
+      </li>
+      <li>
+        <strong>City</strong>: <%= @user.city || "-" %>
+      </li>
+      <li>
+        <strong>Address</strong>: <%= @user.address || "-" %>
+      </li>
+      <li>
+        <strong>Postal Code</strong>: <%= @user.postal_code || "-" %>
+      </li>
+      <li>
+        <strong>Phone Number</strong> <%= @user.phone_number || "-" %>
+      </li>
+      <%= render "update_user_info" %>
+    </ul>
+  </div>
+
 
   <%= render "delete-account" %>
 </div>

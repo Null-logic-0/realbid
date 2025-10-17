@@ -59,6 +59,28 @@
     gap: 1rem;
 }
 
+.profile-info-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    .profile-info-container {
+        flex-direction: column;
+    }
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    width: 100%;
+
+}
+
 .wallet {
     display: flex;
     align-items: center;

@@ -19,10 +19,22 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 10, allow_blank: true }
 
+  validates :phone_number, format: {
+    with: /\A\+?[0-9\s\-\(\)]{7,20}\z/,
+    message: "must be a valid phone number"
+  }
+
   validate :acceptable_image
 
   def total_order_amount
     orders.sum(:amount)
+  end
+
+  def my_balance
+    # Sum of all order amounts for products this user sold
+    Order.joins(:product)
+         .where(products: { user_id: id })
+         .sum(:amount)
   end
 
   private

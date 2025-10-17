@@ -86,6 +86,7 @@ input, textarea, select {
     justify-content: center;
     align-items: center;
     gap: 16px;
+    width: 100%;
 }
 
 .column {
