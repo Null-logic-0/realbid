@@ -15,12 +15,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.except(:phone_number))
     if @user.save
       create_session_for(@user)
       redirect_to profile_path, notice: "You have successfully signed up!"
     else
-      render "new", status: :unprocessable_entity, alert: "Something went wrong"
+      flash.now[:alert] = @user.errors.full_messages.join(", ")
+      render "new", status: :unprocessable_entity
     end
   end
 

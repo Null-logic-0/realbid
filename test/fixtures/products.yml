@@ -1,13 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
+  id: 1
   title: MyString
   description: MyString
   starting_bid: 1
-  auction_duration: 1
+  auction_duration: 12
+  user_id: 980190962
 
 two:
+  id: 2
   title: MyString
   description: MyString
   starting_bid: 1
-  auction_duration: 1
+  auction_duration: 12
+  user_id: 298486374

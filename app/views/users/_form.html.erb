@@ -16,7 +16,7 @@
   <% if @user.errors[:email].any? %>
     <div class="field-error"><%= @user.errors[:email].first %></div>
   <% end %>
-
+  
   <%= f.label :password %>
   <%= f.password_field :password, placeholder: "********" %>
   <% if @user.errors[:password].any? %>

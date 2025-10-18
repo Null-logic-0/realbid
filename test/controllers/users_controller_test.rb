@@ -89,11 +89,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should update profile with valid data" do
     log_in_as(@user)
     patch update_profile_path, params: {
-      user: { name: "Updated name" }
+      user: { name: "UPDATED NAME" }
     }
     assert_redirected_to profile_path
     @user.reload
-    assert_equal "Updated name", @user.name
+    assert_equal "UPDATED NAME", @user.name
   end
 
   # --- DELETE /delete_account ---
@@ -106,6 +106,28 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to signup_path
     follow_redirect!
+  end
+
+  # --- PATCH /update_info ---
+  test "should update info with valid params" do
+    log_in_as(@user)
+    patch update_info_path, params: {
+      user: {
+        country: "Georgia",
+        city: "Tbilisi",
+        address: "Freedom Square 1",
+        postal_code: "0105",
+        phone_number: "1234567890"
+      }
+    }
+
+    assert_redirected_to profile_path
+    follow_redirect!
+    assert_match "You have successfully updated your info!", flash[:notice]
+
+    @user.reload
+    assert_equal "Georgia", @user.country
+    assert_equal "Tbilisi", @user.city
   end
 
   private

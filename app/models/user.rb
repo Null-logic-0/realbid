@@ -19,11 +19,6 @@ class User < ApplicationRecord
             uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 10, allow_blank: true }
 
-  validates :phone_number, format: {
-    with: /\A\+?[0-9\s\-\(\)]{7,20}\z/,
-    message: "must be a valid phone number"
-  }
-
   validate :acceptable_image
 
   def total_order_amount
