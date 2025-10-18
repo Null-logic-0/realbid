@@ -42,8 +42,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
         description: "Awesome auction item",
         starting_bid: 10,
         auction_duration: "72_hours",
-        product_image: product_image,
-        user: @user
+        product_image: product_image
 
       }
 
@@ -55,7 +54,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not create product if address incomplete" do
-    log_in_as(@user)
     @user.update(address: nil)
     post products_url, params: {
       product: {
