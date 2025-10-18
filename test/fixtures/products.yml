@@ -1,15 +1,15 @@
 one:
   id: 1
-  title: MyString
-  description: MyString
+  title: Product title
+  description: This is a product description
   starting_bid: 1
   auction_duration: 12
   user_id: 980190962
 
 two:
   id: 2
-  title: MyString
-  description: MyString
+  title: Product title
+  description: This is a product description
   starting_bid: 1
   auction_duration: 12
   user_id: 298486374

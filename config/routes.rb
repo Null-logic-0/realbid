@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post "/webhooks", to: "webhooks#create"
 
   # Payments
-  post "/create-checkout-session", to: "payments#create"
+  post "/create-checkout-session", to: "payments#create", as: :create_checkout_session
   get "/payments/success", to: "payments#success", as: "success_payments"
   get "/payments/cancel", to: "payments#cancel", as: "cancel_payments"
   get "payments/create"
