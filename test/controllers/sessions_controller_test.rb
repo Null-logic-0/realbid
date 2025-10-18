@@ -24,10 +24,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   # POST /session - invalid login
   test "should not log in with invalid credentials" do
     post session_path, params: { user: { email: @user.email, password: "wrongpassword" } }
-    assert_redirected_to login_path
-    follow_redirect!
+    assert_response :unauthorized
+    assert_template :new
     assert_nil session[:user_id]
-    assert_response :success
+    assert_match /Invalid email or password/, response.body
   end
 
   # DELETE /session - logout

@@ -4,8 +4,8 @@ gem "sidekiq"
 gem "redis"
 gem "kaminari"
 gem "stripe"
-
-gem "dotenv-rails", groups: [ :development, :test ]
+gem "rails-controller-testing"
+gem "dotenv-rails", groups: [:development, :test]
 
 gem "rails", "~> 8.0.3"
 gem "propshaft"
@@ -34,18 +34,18 @@ gem "aws-sdk-s3"
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+	gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
-  gem "brakeman", require: false
+	gem "brakeman", require: false
 
-  gem "rubocop-rails-omakase", require: false
+	gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
-  gem "web-console"
+	gem "web-console"
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+	gem "capybara"
+	gem "selenium-webdriver"
 end
