@@ -29,3 +29,8 @@ production:
 
 cable:
   url: <%= Rails.application.credentials.database_url %>
+
+queue:
+  url: <%= Rails.application.credentials.database_url %>
+
+
