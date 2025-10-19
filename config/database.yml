@@ -1,36 +1,36 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV["PG_HOST"] || "localhost" %>
-  port: <%= ENV["PG_PORT"] || 5432 %>
-  username: <%= ENV["PG_USERNAME"] %>
-  password: <%= ENV["PG_PASSWORD"] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
 
 development:
   <<: *default
   database: realbid_dev
-  username: <%= ENV["PG_USERNAME"] %>
-  password: <%= ENV["PG_PASSWORD"] %>
-  host: <%= ENV["PG_HOST"] %>
+  username: <%= ENV["PG_USERNAME"] || "postgres" %>
+  password: <%= ENV["PG_PASSWORD"] || "password" %>
+  host: <%= ENV["PG_HOST"] || "localhost" %>
   port: <%= ENV["PG_PORT"] || 5432 %>
 
 test:
   <<: *default
   database: realbid_test
-  username: <%= ENV["PG_USERNAME"] %>
-  password: <%= ENV["PG_PASSWORD"] %>
-  host: <%= ENV["PG_HOST"] %>
+  username: <%= ENV["PG_USERNAME"] || "postgres" %>
+  password: <%= ENV["PG_PASSWORD"] || "password" %>
+  host: <%= ENV["PG_HOST"] || "localhost" %>
   port: <%= ENV["PG_PORT"] || 5432 %>
 
 production:
+  <<: *default
   url: <%= Rails.application.credentials.database_url %>
 
 cable:
+  <<: *default
   url: <%= Rails.application.credentials.database_url %>
 
 queue:
+  <<: *default
   url: <%= Rails.application.credentials.database_url %>
 
-
+cache:
+  <<: *default
+  url: <%= Rails.application.credentials.database_url %>
