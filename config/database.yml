@@ -26,3 +26,6 @@ test:
 
 production:
   url: <%= Rails.application.credentials.database_url %>
+
+cable:
+  url: <%= Rails.application.credentials.database_url %>
