@@ -21,17 +21,17 @@ test:
 
 production:
   <<: *default
-  url: <%=ENV["DATABASE_URL"] %>?sslmode=require
+  url: <%= ENV["DATABASE_URL"] %>?sslmode=require
 
 cable:
   <<: *default
-  url: <%=ENV["DATABASE_URL"] %>?sslmode=require
+  url: <%= ENV["DATABASE_URL"] %>?sslmode=require
 
 
 queue:
   <<: *default
-  url: <%=ENV["DATABASE_URL"] %>?sslmode=require
+  url: <%= ENV["DATABASE_URL"] %>?sslmode=require
 
 cache:
   <<: *default
-  url: <%=ENV["DATABASE_URL"] %>?sslmode=require
+  url: <%= ENV["DATABASE_URL"] %>?sslmode=require
