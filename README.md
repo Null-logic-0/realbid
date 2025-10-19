@@ -5,6 +5,12 @@ Realbid 🚀
 Realbid is a live auction web application that allows users to buy and sell products in real-time. Users can place bids,
 sell products to the highest bidder, manage their accounts, and make payments securely.
 
+
+
+
+https://github.com/user-attachments/assets/91c8db2f-9321-40cb-baec-357048b6ead2
+
+
 🌟 Features
 
 User Authentication: signup, login, logout
