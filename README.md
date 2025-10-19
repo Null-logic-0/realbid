@@ -47,7 +47,8 @@ Real-time Features: Turbo Streams for live updates
 
 ⚙️ Setup Instructions
 
-    Clone the repository:
+Clone the repository:
+
     git clone https://github.com/yourusername/realbid.git
     cd realbid
 
