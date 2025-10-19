@@ -25,7 +25,4 @@ test:
   port: <%= ENV["PG_PORT"] || 5432 %>
 
 production:
-  <<: *default
-  database: realbid_production
-  username: postgres
-  password: <%= ENV["REALBID_DATABASE_PASSWORD"] %>
+  url: <%= Rails.application.credentials.database_url %>
