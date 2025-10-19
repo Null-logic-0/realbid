@@ -21,8 +21,7 @@ test:
 
 production:
   <<: *default
-  url: <%= Rails.application.credentials.dig(:production, :database_url) %>
-  sslmode: require
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>?sslmode=require
 
 cable:
   <<: *default
