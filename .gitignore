@@ -37,4 +37,4 @@ config/credentials.yml.enc
 
 /config/credentials/production.key
 .env
-.env
+
