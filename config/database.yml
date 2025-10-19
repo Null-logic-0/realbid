@@ -21,17 +21,18 @@ test:
 
 production:
   <<: *default
-  url: <%= Rails.application.credentials.database_url %>
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>
   sslmode: require
 
 cable:
   <<: *default
-  url: <%= Rails.application.credentials.database_url %>
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>
+
 
 queue:
   <<: *default
-  url: <%= Rails.application.credentials.database_url %>
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>
 
 cache:
   <<: *default
-  url: <%= Rails.application.credentials.database_url %>
+  url: <%= Rails.application.credentials.dig(:production, :database_url) %>
