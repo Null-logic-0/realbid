@@ -8,10 +8,8 @@
 /.bundle
 
 # Ignore all environment files.
-/.env.dev
-.env/*
-.env.test
-.env.local
+
+.env
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -38,3 +36,5 @@
 config/credentials.yml.enc
 
 /config/credentials/production.key
+.env
+.env
