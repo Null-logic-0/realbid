@@ -1,7 +1,5 @@
 source "https://rubygems.org"
 
-license "Apache-2.0"
-
 gem "sidekiq"
 gem "redis"
 gem "kaminari"
