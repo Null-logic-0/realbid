@@ -7,7 +7,7 @@ gem "stripe"
 gem "rails-controller-testing"
 gem "dotenv-rails", groups: [:development, :test]
 
-gem "rails", "~> 8.0.3"
+gem "rails", "~> 8.1.1"
 gem "propshaft"
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
